@@ -190,6 +190,7 @@ object Glicko2 {
    * Game that represents an opponent and the result against it.
    */
   trait Game{def opponent: Player}
+  case class Custom(val opponent: Player, val score: Double) extends Game
   case class Win(val opponent: Player) extends Game
   case class Draw(val opponent: Player) extends Game
   case class Loss(val opponent: Player) extends Game
@@ -201,6 +202,7 @@ object Glicko2 {
     case _: Win => 1
     case _: Draw => 0.5
     case _: Loss => 0
+    case s: Custom => s.score
   }
     
   /**
